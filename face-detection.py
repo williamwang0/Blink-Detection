@@ -2,8 +2,7 @@ import cv2
 import sys
 
 """ Turns passed image into a cascade """
-cascPath = sys.argv[1]
-faceCasc = cv2.CascadeClassifier(cascPath)
+faceCasc = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 video_capture = cv2.VideoCapture(0)
 
@@ -20,7 +19,7 @@ while True:
         scaleFactor=1.2,
         minNeighbors=5,
         minSize=(30, 30),
-        flags=cv2.cv.CV_HAAR_SCALE_IMAGE
+        flags=cv2.CASCADE_SCALE_IMAGE
     )
 
     """ Draws rectangle around faces """
