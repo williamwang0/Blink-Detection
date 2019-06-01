@@ -3,6 +3,7 @@ import sys
 
 """ Turns passed image into a cascade """
 faceCasc = cv2.CascadeClassifier('classifiers/haarcascade_frontalface_default.xml')
+eyeCasc = cv2.CascadeClassifier('classifiers/haarcascade_eye.xml')
 
 video_capture = cv2.VideoCapture(0)
 
@@ -27,9 +28,27 @@ while True:
         #maxSize=(100,100)
     )
 
-    """ Draws rectangle around faces """
+    eyes = eyeCasc.detectMultiScale(
+        grayscale,
+        scaleFactor=1.2,
+        minNeighbors=5,
+        flags=cv2.CASCADE_SCALE_IMAGE,
+        minSize=(30, 30),
+        # maxSize=(100,100)
+    )
+
+    if len(eyes) > 0:
+        print('at least 1 eye opened')
+    else:
+        print('both eyes closed')
+
+
+    """ Draws rectangle around faces in green and eyes in red"""
     for (x, y, w, h) in faces:
         cv2.rectangle(vid_frame, (x, y), (x+w, y+h), (0, 255, 0), thickness=2)
+
+    for (x, y, w, h) in eyes:
+        cv2.rectangle(vid_frame, (x, y), (x + w, y + h), (255, 0, 0), thickness=2)
 
     """ Display resulting frame """
     cv2.imshow('Video', vid_frame)
