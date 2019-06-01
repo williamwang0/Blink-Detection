@@ -7,6 +7,9 @@ eyeCasc = cv2.CascadeClassifier('classifiers/haarcascade_eye.xml')
 
 video_capture = cv2.VideoCapture(0)
 
+blinked = True
+blink_count = 0
+
 while True:
     """ vid_frame is one frame of the webcam feed
         frame_rem is the number of frames remaining in the feed (only matters for video, not webcam) """
@@ -24,31 +27,33 @@ while True:
         scaleFactor=1.2,
         minNeighbors=5,
         flags=cv2.CASCADE_SCALE_IMAGE,
-        minSize=(30, 30),
-        #maxSize=(100,100)
+        minSize=(30, 30)
     )
 
     eyes = eyeCasc.detectMultiScale(
         grayscale,
-        scaleFactor=1.2,
-        minNeighbors=5,
+        scaleFactor=1.1,
+        minNeighbors=7,
         flags=cv2.CASCADE_SCALE_IMAGE,
-        minSize=(30, 30),
-        # maxSize=(100,100)
+        minSize=(30, 30)
     )
 
-    if len(eyes) > 0:
-        print('at least 1 eye opened')
+    if len(eyes) == 0:
+        if blinked:
+            blink_count += 1
+            print('blinked!')
+            print('You blinked ' + str(blink_count) + ' times so far')
+            blinked = False
+        pass
     else:
-        print('both eyes closed')
-
+        blinked = True
 
     """ Draws rectangle around faces in green and eyes in red"""
     for (x, y, w, h) in faces:
         cv2.rectangle(vid_frame, (x, y), (x+w, y+h), (0, 255, 0), thickness=2)
 
     for (x, y, w, h) in eyes:
-        cv2.rectangle(vid_frame, (x, y), (x + w, y + h), (255, 0, 0), thickness=2)
+        cv2.rectangle(vid_frame, (x, y), (x + w, y + h), (0, 0, 255), thickness=2)
 
     """ Display resulting frame """
     cv2.imshow('Video', vid_frame)
