@@ -9,7 +9,11 @@ video_capture = cv2.VideoCapture(0)
 while True:
     """ vid_frame is one frame of the webcam feed
         frame_rem is the number of frames remaining in the feed (only matters for video, not webcam) """
-    frame_rem, vid_frame = video_capture.read()
+    frame_rem, vid_frame1 = video_capture.read()
+
+    """ Resize the video frame to increase fps """
+    h, w, lay = vid_frame1.shape
+    vid_frame = cv2.resize(vid_frame1, (w // 2, h // 2))
 
     """ Converts vid_frame into a grayscale image """
     grayscale = cv2.cvtColor(vid_frame, cv2.COLOR_BGR2GRAY)
@@ -18,8 +22,9 @@ while True:
         grayscale,
         scaleFactor=1.2,
         minNeighbors=5,
+        flags=cv2.CASCADE_SCALE_IMAGE,
         minSize=(30, 30),
-        flags=cv2.CASCADE_SCALE_IMAGE
+        #maxSize=(100,100)
     )
 
     """ Draws rectangle around faces """
