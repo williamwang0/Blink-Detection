@@ -11,3 +11,4 @@ has open or closed eyes, and stores when a face changes from open-eyed to close-
 
 ### Instructions
 * `python3  face-detection.py`
+* type 'q' in video window to quit
