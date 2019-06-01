@@ -15,4 +15,4 @@ has open or closed eyes, and stores when a face changes from open-eyed to close-
 * Number of times blinked is displayed in the terminal
 
 ## Demo
-![Recordit GIF](http://recordit.co/t5A69hsCHr/gif)
+![](demo.gif)
