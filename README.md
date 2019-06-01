@@ -10,8 +10,8 @@ has open or closed eyes, and stores when a face changes from open-eyed to close-
 * OpenCV 3.0+
 
 #### Usage
-* To begin the program: `python3  face-detection.py`
-* type 'q' in video window to quit
+* To begin the program: `python3  blink-detection.py`
+* Type 'q' in video window to quit
 * Number of times blinked is displayed in the terminal
 
 ## Demo
