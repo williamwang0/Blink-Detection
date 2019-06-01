@@ -48,6 +48,7 @@ while True:
         minSize=(30, 30)
     )
 
+    """ Filters out eyes so that all eyes detected are contained inside a face """
     eyes = [eye for eye in eyes if eyeInFace(eye, faces)]
 
     """ Counts how many times someone blinks in the feed """
