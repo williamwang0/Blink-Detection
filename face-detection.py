@@ -2,7 +2,7 @@ import cv2
 import sys
 
 """ Turns passed image into a cascade """
-faceCasc = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+faceCasc = cv2.CascadeClassifier('classifiers/haarcascade_frontalface_default.xml')
 
 video_capture = cv2.VideoCapture(0)
 
