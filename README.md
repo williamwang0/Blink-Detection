@@ -11,8 +11,8 @@ has open or closed eyes, and stores when a face changes from open-eyed to close-
 
 #### Usage
 * To begin the program: `python3  blink-detection.py`
-* Type 'q' in video window to quit
 * Number of times blinked is displayed in the terminal
+* To quit: type 'q' in video window
 
 ## Demo
 ![](demo.gif)
