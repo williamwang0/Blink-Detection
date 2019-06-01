@@ -1,8 +1,8 @@
 # Blink-Detection
 
 ## Overview
-Uses facial recognition to detect when someone blinks in a live feed. Uses OpenCV library to determine whether a face
-has open or closed eyes, and stores when a face changes from open-eyed to close-eyed.
+Uses facial recognition to detect when someone blinks in a live feed. Employs OpenCV library to determine whether a face
+has open or closed eyes, and stores a count of the number of times someone blinks on the feed.
 
 ## Setup
 #### Prerequisites
