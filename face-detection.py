@@ -7,6 +7,7 @@ eyeCasc = cv2.CascadeClassifier('classifiers/haarcascade_eye.xml')
 
 video_capture = cv2.VideoCapture(0)
 
+# blinked boolean to make sure one long blink is still counted as one blink
 blinked = True
 blink_count = 0
 
@@ -38,6 +39,7 @@ while True:
         minSize=(30, 30)
     )
 
+    """ Counts how many times someone blinks in the feed. """
     if len(eyes) == 0:
         if blinked:
             blink_count += 1
