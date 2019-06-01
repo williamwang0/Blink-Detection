@@ -1,5 +1,14 @@
 import cv2
-import sys
+
+
+#FUNCTIONS
+def eyeInFace(e, f):
+    """ Returns true if eye is contained within a detected face """
+    for (fx, fy, fw, fh) in f:
+        if fx < e[0] < fx + w and fy < e[1] < fy + h:
+            return True
+    return False
+
 
 """ Turns passed image into a cascade """
 faceCasc = cv2.CascadeClassifier('classifiers/haarcascade_frontalface_default.xml')
@@ -25,7 +34,7 @@ while True:
 
     faces = faceCasc.detectMultiScale(
         grayscale,
-        scaleFactor=1.2,
+        scaleFactor=1.3,
         minNeighbors=5,
         flags=cv2.CASCADE_SCALE_IMAGE,
         minSize=(30, 30)
@@ -39,7 +48,9 @@ while True:
         minSize=(30, 30)
     )
 
-    """ Counts how many times someone blinks in the feed. """
+    eyes = [eye for eye in eyes if eyeInFace(eye, faces)]
+
+    """ Counts how many times someone blinks in the feed """
     if len(eyes) == 0:
         if blinked:
             blink_count += 1
@@ -50,7 +61,7 @@ while True:
     else:
         blinked = True
 
-    """ Draws rectangle around faces in green and eyes in red"""
+    """ Draws rectangle around faces in green and eyes in red """
     for (x, y, w, h) in faces:
         cv2.rectangle(vid_frame, (x, y), (x+w, y+h), (0, 255, 0), thickness=2)
 
